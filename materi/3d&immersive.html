@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembelajaran Desain 3D & Immersive - DKV</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Three.js for 3D visualization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        /* Custom styles for the glassmorphism effect and theme */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .glass-card {
+            /* Frosted glass effect */
+            background: rgba(255, 255, 255, 0.05); /* Made slightly more transparent for the darker bg */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+        /* Background gradient with moving effect - UPDATED GRADIENT */
+        .animated-gradient {
+            background: linear-gradient(-45deg, #020617, #1e3a8a, #be185d, #03071e);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        #three-canvas {
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 0.75rem; /* Match card radius */
+        }
+    </style>
+</head>
+<body class="animated-gradient text-white">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8">
+        
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-slate-100">Dunia Desain 3D & Immersive</h1>
+            <p class="text-blue-300 mt-2 text-lg">Materi Pembelajaran untuk Siswa DKV</p>
+        </header>
+
+        <!-- Main Content Grid -->
+        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- Card 1: Pengantar Desain 3D -->
+            <div class="glass-card p-6">
+                <h2 class="text-2xl font-semibold mb-3 text-blue-300">1. Apa itu Desain 3D?</h2>
+                <p class="text-slate-300 leading-relaxed">
+                    Desain 3D adalah proses menciptakan representasi objek dalam tiga dimensi (panjang, lebar, dan kedalaman) menggunakan software komputer. Berbeda dari desain 2D yang datar, desain 3D memberikan ilusi realitas, volume, dan ruang.
+                </p>
+            </div>
+            
+            <!-- Card 2: Prinsip Utama -->
+            <div class="glass-card p-6">
+                <h2 class="text-2xl font-semibold mb-3 text-blue-300">2. Prinsip Utama Desain 3D</h2>
+                <ul class="list-disc list-inside text-slate-300 space-y-2">
+                    <li><strong>Bentuk (Form):</strong> Kontur dan struktur dasar objek.</li>
+                    <li><strong>Tekstur (Texture):</strong> Tampilan permukaan objek (kasar, halus, dll).</li>
+                    <li><strong>Pencahayaan (Lighting):</strong> Sumber cahaya yang menciptakan bayangan dan sorotan.</li>
+                    <li><strong>Ruang (Space):</strong> Lingkungan tempat objek berada.</li>
+                </ul>
+            </div>
+
+            <!-- Card 3: Desain Immersive (VR/AR) -->
+            <div class="glass-card p-6">
+                <h2 class="text-2xl font-semibold mb-3 text-blue-300">3. Mengenal Desain Immersive</h2>
+                <p class="text-slate-300 leading-relaxed">
+                    Desain Immersive membawa 3D ke level selanjutnya. Ini adalah tentang menciptakan pengalaman di mana pengguna merasa "tenggelam" di dalam dunia digital.
+                    <br><br>
+                    <strong>VR (Virtual Reality):</strong> Menciptakan dunia digital total.
+                    <br>
+                    <strong>AR (Augmented Reality):</strong> Menambahkan elemen digital ke dunia nyata.
+                </p>
+            </div>
+
+            <!-- Card 4: Visualisasi 3D Interaktif -->
+            <div class="glass-card p-6 md:col-span-2 lg:col-span-1">
+                 <h2 class="text-2xl font-semibold mb-3 text-blue-300">4. Visualisasi 3D Interaktif</h2>
+                 <p class="text-slate-300 mb-4 text-sm">Geser dan putar kubus di bawah ini menggunakan mouse Anda.</p>
+                 <div id="canvas-container" class="w-full h-48 bg-black/20 rounded-lg">
+                    <!-- Canvas for Three.js will be injected here -->
+                 </div>
+            </div>
+
+            <!-- Card 5: Software Populer -->
+            <div class="glass-card p-6">
+                <h2 class="text-2xl font-semibold mb-3 text-blue-300">5. Software yang Digunakan</h2>
+                <p class="text-slate-300 leading-relaxed">
+                    Untuk memulai, kamu bisa mencoba beberapa software ini:
+                </p>
+                <ul class="list-disc list-inside text-slate-300 mt-2">
+                    <li><strong>Blender</strong> (Gratis & Open Source)</li>
+                    <li>Autodesk 3ds Max / Maya</li>
+                    <li>ZBrush (Untuk sculpting)</li>
+                    <li>Unity / Unreal Engine (Untuk VR/AR)</li>
+                </ul>
+            </div>
+
+            <!-- Card 6: Prospek Karir -->
+            <div class="glass-card p-6">
+                <h2 class="text-2xl font-semibold mb-3 text-blue-300">6. Prospek Karir di Masa Depan</h2>
+                <p class="text-slate-300 leading-relaxed">
+                    Keahlian ini membuka banyak pintu karir yang menarik, seperti:
+                </p>
+                 <ul class="list-disc list-inside text-slate-300 mt-2">
+                    <li>3D Modeler & Artist</li>
+                    <li>Animator</li>
+                    <li>Game Designer</li>
+                    <li>AR/VR Developer</li>
+                    <li>Visual Effects (VFX) Artist</li>
+                </ul>
+            </div>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="text-center mt-16">
+            <p class="text-slate-400/70 text-sm">© 2025 - Materi Pembelajaran DKV</p>
+            <p class="text-slate-300/90 font-semibold mt-1">SMK Negeri Tapango 2025</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // --- Three.js Interactive Visualization Script ---
+        
+        // Find the container for our canvas
+        const container = document.getElementById('canvas-container');
+
+        // 1. Scene: The world where everything exists
+        const scene = new THREE.Scene();
+
+        // 2. Camera: Our viewpoint into the scene
+        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+        camera.position.z = 3;
+
+        // 3. Renderer: Renders the scene from the camera's perspective
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); // alpha:true for transparent background
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setClearColor(0x000000, 0); // transparent
+        container.appendChild(renderer.domElement);
+        
+        // 4. Geometry & Material: The shape and skin of our object
+        const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
+        // A slightly metallic, reflective material
+        const material = new THREE.MeshStandardMaterial({ 
+            color: 0x3b82f6, // A lighter blue to pop against the dark bg
+            metalness: 0.5,
+            roughness: 0.4
+        });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        // 5. Lighting: To make the object visible and show depth
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Soft white light
+        scene.add(ambientLight);
+        
+        const pointLight = new THREE.PointLight(0xffffff, 0.8); // A stronger light source
+        pointLight.position.set(2, 3, 4);
+        scene.add(pointLight);
+
+        // --- Interactivity: Mouse controls ---
+        let isMouseDown = false;
+        let previousMousePosition = { x: 0, y: 0 };
+
+        renderer.domElement.addEventListener('mousedown', (e) => {
+            isMouseDown = true;
+        });
+
+        renderer.domElement.addEventListener('mouseup', (e) => {
+            isMouseDown = false;
+        });
+        
+        renderer.domElement.addEventListener('mouseleave', (e) => {
+            isMouseDown = false;
+        });
+
+        renderer.domElement.addEventListener('mousemove', (e) => {
+            if (!isMouseDown) {
+                return;
+            }
+            const deltaX = e.clientX - previousMousePosition.x;
+            const deltaY = e.clientY - previousMousePosition.y;
+
+            cube.rotation.y += deltaX * 0.005;
+            cube.rotation.x += deltaY * 0.005;
+            
+            previousMousePosition = { x: e.clientX, y: e.clientY };
+        });
+
+        // Initialize mouse position
+        renderer.domElement.addEventListener('mousedown', (e) => {
+            previousMousePosition = { x: e.clientX, y: e.clientY };
+        });
+
+        // 6. Animate: The function that runs every frame
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // If not being dragged by mouse, give it a slow default rotation
+            if (!isMouseDown) {
+                cube.rotation.x += 0.001;
+                cube.rotation.y += 0.002;
+            }
+
+            renderer.render(scene, camera);
+        }
+        
+        // Handle window resize to keep the canvas responsive
+        window.addEventListener('resize', () => {
+            // Update camera aspect ratio
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            // Update renderer size
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        }, false);
+
+
+        // Start the animation
+        animate();
+    </script>
+</body>
+</html>
