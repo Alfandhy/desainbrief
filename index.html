@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Desain DKV SMK NEGERI Tapango</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0d1117; /* Dark background */
+            color: #e6edf3;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Aurora background effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 15% 30%, rgba(139, 92, 246, 0.25) 0%, transparent 40%),
+                radial-gradient(circle at 85% 70%, rgba(34, 211, 238, 0.25) 0%, transparent 40%);
+            filter: blur(120px);
+            animation: moveAurora 20s infinite linear;
+        }
+        
+        @keyframes moveAurora {
+            0% { transform: rotate(0deg) scale(1.5); }
+            50% { transform: rotate(180deg) scale(1.6); }
+            100% { transform: rotate(360deg) scale(1.5); }
+        }
+
+        /* Glassmorphism Card Style */
+        .topic-card {
+            background: rgba(31, 41, 55, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            cursor: pointer;
+            border-radius: 1rem; /* rounded-2xl */
+        }
+        .topic-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            background: rgba(31, 41, 55, 0.6);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #06b6d4, #d946ef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #161b22;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #8b5cf6;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a855f7;
+        }
+
+        .icon-container {
+            margin-bottom: 1rem;
+            color: #9ca3af;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .topic-card:hover .icon-container {
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        /* Detail Page Styling */
+        #detail-view .detail-panel {
+            background: rgba(13, 17, 23, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem; /* rounded-2xl */
+        }
+        #detail-body h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+            margin-top: 2rem;
+            border-left: 3px solid #d946ef;
+            padding-left: 1rem;
+        }
+        #detail-body ul {
+            list-style-type: disc;
+            list-style-position: inside;
+            space-y: 0.75rem;
+            margin-bottom: 1rem;
+            padding-left: 0.5rem;
+        }
+        #detail-body p {
+            line-height: 1.75;
+        }
+
+        /* CTA Button Style for Detail Page */
+        .cta-button-detail {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(90deg, #06b6d4, #d946ef);
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px; /* pill shape */
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .cta-button-detail:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .cta-button-detail svg {
+            transition: transform 0.3s ease;
+        }
+        .cta-button-detail:hover svg {
+            transform: translateX(4px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Container -->
+    <div id="main-view" class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <!-- Header -->
+        <header class="text-center mb-16">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+                <span class="gradient-text">Materi Topik Desain</span><br>
+                <span class="text-white text-2xl sm:text-3xl md:text-4xl">SMK NEGERI Tapango</span>
+            </h1>
+            <p class="text-lg text-gray-400 max-w-3xl mx-auto">
+                Jurusan Desain Komunikasi Visual. Klik kartu untuk melihat materi lengkap.
+            </p>
+        </header>
+        
+        <!-- Topics Grid -->
+        <main id="topic-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <!-- Cards will be injected here by JavaScript -->
+        </main>
+    </div>
+
+    <!-- Detail Page View (hidden by default) -->
+    <div id="detail-view" class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 hidden">
+        <div class="max-w-4xl mx-auto">
+            <button id="back-button" class="inline-flex items-center gap-2 mb-8 text-fuchsia-400 hover:text-fuchsia-300 transition-colors text-lg font-semibold">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                Kembali ke Galeri
+            </button>
+            <div class="detail-panel rounded-lg shadow-2xl p-6 sm:p-10">
+                <h2 id="detail-title" class="text-3xl sm:text-4xl font-bold mb-8 gradient-text"></h2>
+                <div id="detail-body" class="text-gray-300 leading-relaxed text-lg space-y-4">
+                    <!-- Detail content will be injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Footer -->
+    <footer class="text-center py-8 text-gray-500 text-sm mt-16">
+        &copy; 2025 SMK NEGERI Tapango
+    </footer>
+
+    <script>
+        // --- DATA ---
+        // GANTI TANDA PAGAR (#) DENGAN URL/LINK WEBSITE YANG DIINGINKAN
+        const topics = [
+            {
+                title: "AI-powered Design",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>`,
+                description: `<p><strong>AI-Powered Design</strong> adalah pemanfaatan teknologi kecerdasan buatan untuk membantu dan mempercepat berbagai tahapan dalam proses desain. AI tidak bertujuan menggantikan peran desainer, melainkan bertindak sebagai asisten cerdas...</p><h4>Bagaimana AI Digunakan dalam Desain?</h4><ul><li><strong>Ideasi Cepat (Rapid Ideation):</strong> Menghasilkan ratusan variasi konsep visual...</li><li><strong>Otomatisasi Tugas:</strong> Melakukan tugas seperti menghapus latar belakang gambar...</li><li><strong>Personalisasi Desain:</strong> Menganalisis data pengguna untuk menampilkan desain yang paling relevan...</li><li><strong>Analisis dan Prediksi:</strong> Menganalisis desain untuk memprediksi ke mana mata pengguna akan tertuju...</li></ul><h4>Contoh Tools:</h4><p>Midjourney & DALL-E, Adobe Firefly, Khroma, Uizard.</p>`,
+                link: 'materi/AI-powered Design/index.html'
+            },
+            {
+                title: "Bold Minimalism",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16v4m-2-2h4m5 10v4m-2-2h4" /></svg>`,
+                description: `<p><strong>Bold Minimalism</strong> adalah prinsip 'less is more' yang dipertegas. Gaya ini berfokus pada elemen esensial, namun dengan penekanan kuat pada beberapa elemen kunci untuk menciptakan dampak visual yang dramatis dan jelas...</p><h4>Karakteristik Utama:</h4><ul><li><strong>Tipografi Kuat:</strong> Huruf menjadi elemen visual utama...</li><li><strong>Warna Kontras Tinggi:</strong> Penggunaan palet warna terbatas...</li><li><strong>Ruang Kosong (Whitespace):</strong> Pemanfaatan ruang negatif secara ekstensif...</li><li><strong>Grid yang Tegas:</strong> Tata letak yang sangat terstruktur...</li></ul><h4>Contoh Penerapan:</h4><p>Sangat cocok untuk website portofolio, brand mewah, poster acara, kemasan produk premium...</p>`,
+                link: 'main/materi/AI-powered Design/index.html'
+            },
+            {
+                title: "3D & Immersive Design",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1e-16V5l-2-2H6L4 5v2.001L2 7.001V17l2-2v2l2 2h12l2-2v-2l2-2V7z" /></svg>`,
+                description: `<p><strong>3D & Immersive Design</strong> adalah tentang menciptakan objek dan lingkungan tiga dimensi yang realistis atau bergaya untuk memberikan kedalaman dan interaktivitas...</p><h4>Bentuk Implementasi:</h4><ul><li><strong>Grafis 3D:</strong> Ilustrasi, ikon, dan karakter 3D...</li><li><strong>Animasi 3D:</strong> Video penjelasan produk, intro logo...</li><li><strong>Augmented Reality (AR):</strong> Menampilkan objek 3D di dunia nyata...</li><li><strong>Virtual Reality (VR):</strong> Menciptakan dunia digital sepenuhnya yang imersif...</li></ul><h4>Contoh Tools:</h4><p>Blender, Cinema 4D, Spline, Adobe Substance 3D, Unity.</p>`,
+                link: 'main/materi/AI-powered Design/index.html'
+            },
+            {
+                title: "Motion Graphics & Animasi",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
+                description: `<p><strong>Motion Graphics & Animasi</strong> adalah penggunaan grafis yang 'dihidupkan' atau digerakkan untuk menyampaikan informasi secara dinamis...</p><h4>Jenis & Penerapan:</h4><ul><li><strong>Explainer Video:</strong> Video animasi singkat...</li><li><strong>Logo Animation:</strong> Membuat logo menjadi lebih hidup...</li><li><strong>UI/UX Animation:</strong> Animasi pada tombol, transisi halaman...</li><li><strong>Social Media Content:</strong> Postingan, story, atau iklan animasi...</li></ul><h4>Contoh Tools:</h4><p>Adobe After Effects, Adobe Animate, Lottie, Rive, Canva.</p>`,
+                link: 'main/materi/AI-powered Design/index.html'
+            },
+            {
+                title: "Retro & Futuristic Aesthetics",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18" /></svg>`,
+                description: `<p><strong>Retro & Futuristic Aesthetics</strong> adalah gaya yang menciptakan perpaduan unik antara nostalgia dan visi masa depan...</p><h4>Elemen Kunci:</h4><ul><li><strong>Retro:</strong> Gaya dari era 80-an & 90-an...</li><li><strong>Futuristik:</strong> Warna neon terang, efek glitch...</li></ul><h4>Contoh Penerapan:</h4><p>Desain poster musik, sampul album, branding untuk merek fashion...</p><h4>Contoh Tools:</h4><p>Adobe Photoshop & Illustrator, After Effects...</p>`,
+                link: 'main/materi/AI-powered Design/index.html'
+            },
+            {
+                title: "Mixed Media & Scrapbook",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l-1.586-1.586a2 2 0 00-2.828 0L6 14m6-6l.01.01" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657l-1.414-1.414A2 2 0 0116 16H8a2 2 0 01-2-2V8a2 2 0 012-2h4.586a2 2 0 011.414.586l2.828 2.828a2 2 0 01.586 1.414V16a2 2 0 01-2 2h-1.172" /></svg>`,
+                description: `<p><strong>Mixed Media & Scrapbook</strong> adalah gaya desain yang menggabungkan berbagai elemen visual berbeda untuk menciptakan nuansa yang personal...</p><h4>Elemen yang Digabungkan:</h4><ul><li>Fotografi (seringkali dengan gaya vintage...).</li><li>Ilustrasi atau coretan tangan digital...</li><li>Tekstur digital seperti sobekan kertas...</li><li>Tipografi yang beragam...</li></ul><h4>Contoh Penerapan:</h4><p>Desain konten media sosial, website personal/portofolio...</p><h4>Contoh Tools:</h4><p>Procreate, Adobe Photoshop, Canva.</p>`,
+                link: 'main/materi/AI-powered Design/index.html'
+            },
+            {
+                title: "Gradients & Blends",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#22d3ee;stop-opacity:1" /><stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1" /></linearGradient></defs><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="9" fill="url(#grad1)" /></svg>`,
+                description: `<p><strong>Gradients & Blends</strong> adalah penggunaan transisi warna yang halus untuk menciptakan kedalaman, mood, dan tampilan visual yang modern...</p><h4>Jenis Gradien Populer:</h4><ul><li><strong>Linear Gradient:</strong> Transisi warna dalam satu garis lurus.</li><li><strong>Radial Gradient:</strong> Transisi warna dari satu titik pusat ke luar.</li><li><strong>Mesh Gradient:</strong> Gradien multi-titik...</li><li><strong>Aura/Grainy Gradient:</strong> Gradien yang lembut dengan tambahan efek noise/grain...</li></ul><h4>Contoh Penerapan:</h4><p>Latar belakang website dan aplikasi, branding (logo, kartu nama)...</p><h4>Contoh Tools:</h4><p>Figma, Adobe Illustrator & Photoshop, CSS (untuk web)...</p>`,
+                link: 'main/materi/AI-powered Design/index.html'
+            },
+            {
+                title: "Serif & Experimental Typography",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v12M13 5h8m-4 14l-4-8 4-4" /></svg>`,
+                description: `<p><strong>Serif & Experimental Typography</strong> adalah tren yang menempatkan tipografi bukan hanya sebagai teks untuk dibaca, tetapi sebagai elemen visual utama...</p><h4>Dua Sisi Tren Ini:</h4><ul><li><strong>Penggunaan Serif:</strong> Kebangkitan kembali huruf serif...</li><li><strong>Tipografi Eksperimental:</strong> 'Merusak' aturan tipografi konvensional...</li></ul><h4>Contoh Penerapan:</h4><p>Desain logo, judul utama (headline) di majalah atau website...</p><h4>Contoh Tools:</h4><p>Adobe Fonts, Google Fonts, Adobe Illustrator, Fontself...</p>`,
+                link: 'main/materi/AI-powered Design/index.html'
+            },
+            {
+                title: "Organic & Biophilic Design",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>`,
+                description: `<p><strong>Organic & Biophilic Design</strong> adalah pendekatan desain yang terinspirasi oleh alam... Tujuannya adalah untuk menciptakan hubungan visual antara manusia dan alam...</p><h4>Karakteristik Utama:</h4><ul><li><strong>Bentuk Organik:</strong> Menggunakan bentuk-bentuk yang tidak kaku...</li><li><strong>Palet Warna Bumi (Earth Tones):</strong> Dominasi warna-warna seperti coklat, hijau daun...</li><li><strong>Tekstur Alami:</strong> Menggunakan gambar atau pola yang meniru tekstur kayu...</li><li><strong>Citra Flora & Fauna:</strong> Penggunaan ilustrasi atau foto tumbuhan...</li></ul><h4>Contoh Penerapan:</h4><p>Branding untuk produk kecantikan alami, kemasan makanan organik...</p>`,
+                link: 'main/materi/AI-powered Design/index.html'
+            },
+            {
+                title: "Diversity & Inclusion",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.122-1.28-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.122-1.28.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>`,
+                description: `<p><strong>Diversity & Inclusion (Keberagaman & Inklusi)</strong> dalam desain adalah sebuah prinsip untuk merepresentasikan berbagai macam manusia secara otentik dan hormat...</p><h4>Aspek yang Direpresentasikan:</h4><ul><li><strong>Etnis dan Ras:</strong> Menampilkan orang-orang dari berbagai suku...</li><li><strong>Usia dan Gender:</strong> Menampilkan berbagai rentang usia...</li><li><strong>Kemampuan Fisik:</strong> Menampilkan orang dengan berbagai kemampuan...</li><li><strong>Latar Belakang Budaya:</strong> Menghormati dan menampilkan berbagai tradisi...</li></ul><h4>Contoh Penerapan:</h4><p>Fotografi stok di website perusahaan, kampanye iklan...</p>`,
+                link: 'main/materi/AI-powered Design/index.html'
+            },
+            {
+                title: "UI/UX Design",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>`,
+                description: `<p><strong>UI/UX Design</strong> adalah dua disiplin yang sangat penting dalam pengembangan produk digital...</p><h4>UI (User Interface) Design:</h4><p>Fokus pada aspek visual dan interaktif dari sebuah produk...</p><ul><li>Desain layout atau tata letak halaman.</li><li>Pemilihan skema warna dan tipografi.</li></ul><h4>UX (User Experience) Design:</h4><p>Fokus pada keseluruhan pengalaman dan perasaan pengguna...</p><ul><li>Riset pengguna untuk memahami kebutuhan...</li><li>Membuat alur pengguna (user flow)...</li></ul><h4>Contoh Tools:</h4><p>Figma, Sketch, Adobe XD.</p>`,
+                link: 'main/materi/AI-powered Design/index.html'
+            },
+            {
+                title: "Data-driven Design",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>`,
+                description: `<p><strong>Data-Driven Design</strong> adalah pendekatan di mana keputusan desain dibuat berdasarkan analisis data dan perilaku pengguna...</p><h4>Metode yang Digunakan:</h4><ul><li><strong>A/B Testing:</strong> Menampilkan dua versi desain...</li><li><strong>Heatmaps:</strong> Visualisasi data yang menunjukkan area...</li><li><strong>Analisis Alur Pengguna:</strong> Melihat data di mana pengguna keluar...</li><li><strong>Survei dan Feedback:</strong> Mengumpulkan umpan balik kualitatif...</li></ul><h4>Contoh Penerapan:</h4><p>Meningkatkan tombol 'Beli Sekarang' di situs e-commerce...</p><h4>Contoh Tools:</h4><p>Google Analytics, Hotjar, VWO, SurveyMonkey.</p>`,
+                link: 'main/materi/AI-powered Design/index.html'
+            },
+            {
+                title: "AR & VR Design",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 11H7a2 2 0 00-2 2v4a2 2 0 002 2h2v-6zM17 11h-2v6h2a2 2 0 002-2v-4a2 2 0 00-2-2z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16v12H4V6z" /></svg>`,
+                description: `<p><strong>AR & VR Design</strong> adalah spesialisasi desain yang berfokus pada pembuatan pengalaman untuk teknologi Augmented Reality (AR) dan Virtual Reality (VR)...</p><h4>Perbedaan Kunci:</h4><ul><li><strong>AR (Augmented Reality):</strong> Menambahkan atau 'melapisi' elemen digital...</li><li><strong>VR (Virtual Reality):</strong> Menciptakan lingkungan digital yang sepenuhnya imersif...</li></ul><h4>Contoh Penerapan:</h4><p><strong>AR:</strong> Filter media sosial, aplikasi untuk mencoba kacamata... <strong>VR:</strong> Game imersif, simulasi pelatihan...</p><h4>Contoh Tools:</h4><p>Unity, Unreal Engine, Adobe Aero.</p>`,
+                link: 'main/materi/AI-powered Design/index.html'
+            },
+            {
+                title: "Anti-design & Maximalism",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h5M5 4l15 15m-5-5h5V4" /></svg>`,
+                description: `<p><strong>Anti-Design & Maximalism</strong> adalah gerakan pemberontakan terhadap aturan desain yang rapi, bersih, dan minimalis...</p><h4>Karakteristik Utama:</h4><ul><li><strong>Asimetri & Kekacauan:</strong> Tata letak yang tidak mengikuti grid...</li><li><strong>Tipografi Bertabrakan:</strong> Menggunakan banyak jenis font...</li><li><strong>Warna yang Bentrok:</strong> Palet warna yang sengaja dibuat tidak harmonis...</li><li><strong>Kepadatan Visual (Maximalism):</strong> Memenuhi ruang desain dengan banyak elemen...</li></ul><h4>Contoh Penerapan:</h4><p>Poster untuk acara musik underground, website untuk seniman eksperimental...</p>`,
+                link: 'main/materi/AI-powered Design/index.html'
+            },
+            {
+                title: "Textured & Retro Design",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4" /></svg>`,
+                description: `<p><strong>Textured & Retro Design</strong> adalah gaya yang bertujuan untuk menambahkan nuansa nostalgia dan sentuhan fisik ke dalam karya digital...</p><h4>Elemen yang Sering Digunakan:</h4><ul><li><strong>Grain/Noise:</strong> Menambahkan efek 'bintik-bintik'...</li><li><strong>Tekstur Kertas:</strong> Menggunakan overlay gambar kertas usang...</li><li><strong>Efek Cetak Vintage:</strong> Meniru ketidaksempurnaan cetakan lama...</li><li><strong>Elemen Visual Retro:</strong> Tipografi dan ilustrasi yang terinspirasi...</li></ul><h4>Contoh Penerapan:</h4><p>Filter foto di aplikasi (seperti VSCO), branding untuk produk kopi...</p><h4>Contoh Tools:</h4><p>Adobe Photoshop, Lightroom, Procreate, RetroSupply.</p>`,
+                link: 'https://www.adobe.com/sensei/generative-ai.html'
+            },
+            {
+                title: "Micro Animation & Interactive UI",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M19 17v4m-2-2h4M12 3l2.3 7.3L22 12l-7.7 1.7L12 21l-2.3-7.3L2 12l7.7-1.7L12 3z" /></svg>`,
+                description: `<p><strong>Micro Animation & Interactive UI</strong> adalah animasi kecil dan halus yang memiliki tujuan fungsional dalam sebuah antarmuka...</p><h4>Tujuan & Fungsi:</h4><ul><li><strong>Memberikan Feedback:</strong> Menunjukkan bahwa sebuah aksi telah berhasil...</li><li><strong>Menunjukkan Status:</strong> Menampilkan proses yang sedang berjalan...</li><li><strong>Mengarahkan Perhatian:</strong> Menyorot elemen penting...</li><li><strong>Membuat Transisi Mulus:</strong> Animasi perpindahan antar halaman...</li></ul><h4>Contoh Penerapan:</h4><p>Hampir di setiap aplikasi dan website modern. Ikon 'Like' yang meledak...</p><h4>Contoh Tools:</h4><p>Figma (Smart Animate), Adobe After Effects + Lottie, Rive, ProtoPie.</p>`,
+                link: 'https://www.adobe.com/sensei/generative-ai.html'
+            },
+            {
+                title: "Personal Branding & Social Media",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>`,
+                description: `<p><strong>Personal Branding & Social Media Design</strong> adalah proses menciptakan dan memelihara identitas visual yang kuat dan konsisten untuk individu atau merek...</p><h4>Elemen Kunci:</h4><ul><li><strong>Logo & Foto Profil:</strong> Tanda pengenal utama...</li><li><strong>Palet Warna:</strong> Set warna yang konsisten...</li><li><strong>Tipografi:</strong> Pemilihan jenis font...</li><li><strong>Template Konten:</strong> Layout yang telah dirancang...</li><li><strong>Gaya Visual:</strong> Gaya fotografi atau ilustrasi...</li></ul><h4>Contoh Penerapan:</h4><p>Profil Instagram seorang influencer, halaman Facebook sebuah kafe lokal...</p><h4>Contoh Tools:</h4><p>Canva, Adobe Express, Figma, Buffer.</p>`,
+                link: 'https://www.adobe.com/sensei/generative-ai.html'
+            },
+            {
+                title: "Sustainable Design",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zm0 0V4m0 4v2m0-2h2m-2 0H8m11.93-4.93l-1.414 1.414M4.486 19.514l1.414-1.414M19.514 4.486l-1.414 1.414M4.486 4.486l1.414 1.414M21 12h-2m-2 0h2m-2 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
+                description: `<p><strong>Sustainable Design (Desain Berkelanjutan)</strong> adalah pendekatan desain yang mempertimbangkan dampak lingkungan, sosial, dan ekonomi dari sebuah karya...</p><h4>Penerapan dalam Desain Digital:</h4><ul><li><strong>Dark Mode (Mode Gelap):</strong> Pada layar OLED, mode gelap dapat menghemat...</li><li><strong>Desain yang Efisien (Web Performance):</strong> Mengoptimalkan ukuran gambar...</li><li><strong>Pemilihan Font Sistem:</strong> Menggunakan font yang sudah ada di sistem...</li><li><strong>Pesan Pro-Lingkungan:</strong> Menggunakan desain untuk mempromosikan...</li></ul><h4>Contoh Penerapan:</h4><p>Website untuk merek yang ramah lingkungan, laporan keberlanjutan perusahaan...</p>`,
+                link: 'https://www.adobe.com/sensei/generative-ai.html'
+            },
+            {
+                title: "No-code Tools",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 003 0m-3 0h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
+                description: `<p><strong>No-code Tools</strong> adalah platform dan aplikasi yang memungkinkan siapa saja untuk membuat produk digital seperti website, aplikasi, atau otomatisasi alur kerja tanpa perlu menulis satu baris kode pun...</p><h4>Kategori Tools:</h4><ul><li><strong>Website Builder:</strong> Membangun website yang kompleks...</li><li><strong>App Builder:</strong> Membuat aplikasi mobile atau web...</li><li><strong>Desain & Prototyping:</strong> Meskipun bukan 'no-code'...</li><li><strong>Otomatisasi:</strong> Menghubungkan berbagai aplikasi...</li></ul><h4>Contoh Tools:</h4><p><strong>Website:</strong> Webflow, Framer. <strong>Aplikasi:</strong> Bubble, Glide. <strong>Desain:</strong> Figma. <strong>Otomatisasi:</strong> Zapier.</p>`,
+                link: 'https://webflow.com/'
+            },
+            {
+                title: "Collaboration & Remote Workflow",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.122-1.28-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.122-1.28.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>`,
+                description: `<p><strong>Collaboration & Remote Workflow</strong> merujuk pada proses dan alat yang memungkinkan tim desain untuk bekerja sama secara efektif meskipun tidak berada di lokasi fisik yang sama...</p><h4>Komponen Penting:</h4><ul><li><strong>Alat Desain Kolaboratif:</strong> Platform di mana beberapa desainer dapat mengerjakan...</li><li><strong>Papan Tulis Digital (Digital Whiteboard):</strong> Ruang tak terbatas untuk brainstorming...</li><li><strong>Komunikasi:</strong> Aplikasi pesan instan dan video conference...</li><li><strong>Manajemen Proyek:</strong> Tools untuk melacak tugas, tenggat waktu...</li></ul><h4>Contoh Tools:</h4><p><strong>Desain:</strong> Figma. <strong>Whiteboard:</strong> Miro, FigJam. <strong>Komunikasi:</strong> Slack, Discord. <strong>Manajemen Proyek:</strong> Asana, Trello, Notion.</p>`,
+                link: 'https://www.miro.com/'
+            }
+        ];
+        
+        // --- DOM ELEMENTS ---
+        const mainView = document.getElementById('main-view');
+        const grid = document.getElementById('topic-grid');
+        const detailView = document.getElementById('detail-view');
+        const detailTitle = document.getElementById('detail-title');
+        const detailBody = document.getElementById('detail-body');
+        const backButton = document.getElementById('back-button');
+
+        // --- FUNCTIONS ---
+        function renderTopics(topicsToRender = topics) {
+            grid.innerHTML = '';
+            topicsToRender.forEach((topic, index) => {
+                const card = document.createElement('div');
+                card.className = 'topic-card rounded-2xl p-6 flex flex-col justify-center items-center text-center';
+                card.setAttribute('data-index', index);
+
+                card.innerHTML = `
+                    <div class="icon-container flex-grow flex items-center justify-center">${topic.icon}</div>
+                    <h3 class="text-lg font-semibold text-white mt-4">${topic.title}</h3>
+                `;
+                grid.appendChild(card);
+            });
+        }
+        
+        function showDetailPage(index) {
+            const topic = topics[index];
+            
+            detailTitle.textContent = topic.title;
+            
+            let detailHTML = topic.description;
+
+            // Check if a link exists and is not just a placeholder '#'
+            if (topic.link && topic.link.trim() !== '#') {
+                detailHTML += `
+                    <div class="mt-10 text-center">
+                        <a href="${topic.link}" target="_blank" rel="noopener noreferrer" class="cta-button-detail">
+                            <span>Pelajari lebih lanjut</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                `;
+            }
+
+            detailBody.innerHTML = detailHTML;
+            
+            mainView.classList.add('hidden');
+            detailView.classList.remove('hidden');
+            detailView.classList.add('fade-in');
+            window.scrollTo(0, 0);
+        }
+
+        function showMainPage() {
+            detailView.classList.add('hidden');
+            mainView.classList.remove('hidden');
+            mainView.classList.add('fade-in');
+        }
+        
+        // --- EVENT LISTENERS ---
+        grid.addEventListener('click', (event) => {
+            const card = event.target.closest('.topic-card');
+            if (card) {
+                const index = card.getAttribute('data-index');
+                showDetailPage(index);
+            }
+        });
+
+        backButton.addEventListener('click', showMainPage);
+
+        // --- INITIALIZATION ---
+        renderTopics();
+
+    </script>
+</body>
+</html>
